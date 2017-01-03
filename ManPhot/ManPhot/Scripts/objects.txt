@@ -1,0 +1,46 @@
+﻿variable object
+---------------
+star id
+star name
+star coord
+check star: label
+			coord
+			vcat
+comp stars[]: sn
+			  label
+			  vcat
+maps[]: url
+map_name 
+std_comment
+
+--------------------------------
+
+
+VarStar.prototype = {
+	id: '',
+	name: '',
+	ra: '',
+	de: '',
+	check: 
+}
+
+
+
+CheckStar.prototype = {
+	label: '',
+	ra: '',
+	de: '',
+	vcat: 0.0
+}
+
+CompStar.prototype = {
+	sn: 0,
+	label: '',
+	vcat: 0.0
+}
+
+
+
+
+result object
+-------------

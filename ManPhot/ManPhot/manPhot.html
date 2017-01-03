@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="Styles/default.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.1.1.js"></script>
+    <script src="Scripts/variables.js"></script>
+    <script src="Scripts/manPhot.js"></script>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <hgroup id="headerText">
+                <h1>Photometry</h1>
+            </hgroup>
+        </header>
+        <div>
+            <select>
+                <option value="vv_cep">VV Cep</option>
+                <option value="w_cyg">W Cyg</option>
+                <option value="uu_aur">UU Aur</option>
+            </select>
+        </div>
+        <div>
+            <label>Target Star Table</label>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Star</th>
+                        <th>RA&nbsp;&nbsp;D</th>
+                        <th>I Mag</th>
+                        <th>V Mag</th>
+                        <th>Linear err</th>
+                        <th>Final err</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div>
+            <label>Check Star Table</label>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Star</th>
+                        <th>RA&nbsp;&nbsp;D</th>
+                        <th>V Cat</th>
+                        <th>Check I Mag</th>
+                        <th>Check V Mag</th>
+                        <th>Linear err</th>
+                        <th>Final err</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div>
+            <label>Transformation Coefficient output table</label>
+            <table>
+                <tr>
+                    <td>Slope:</td>
+                    <td id="slope"></td>
+                    <td>Intercept:</td>
+                    <td id="intercept"></td>
+                    <td>R2:</td>
+                    <td id="r2"></td>
+                </tr>                
+            </table>
+        </div>
+        <div>
+            <button id="btnRefresh">Refresh</button>
+        </div>
+    </div>
+</body>
+</html>
