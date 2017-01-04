@@ -44,3 +44,5 @@ CompStar.prototype = {
 
 result object
 -------------
+
+http://stackoverflow.com/questions/14388452/how-do-i-load-a-json-object-from-a-file-with-ajax

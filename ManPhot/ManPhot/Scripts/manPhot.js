@@ -10,7 +10,8 @@ $(document).ready(function () {
 
     ns.initialize = function () {
         //$('#btnRefresh').on('click', ns.testLinearRegression);
-        $('#btnRefresh').on('click', ns.load_UU_Aur);
+        $('#btnRefresh').click(ns.load_UU_Aur);
+        $('#varSelector').change(ns.loadVariable);
     }
 
     ns.load_UU_Aur = function () {
@@ -19,6 +20,11 @@ $(document).ready(function () {
         alert(vstar.comps[0].label);
         //var hello = get_hello();
         //alert(hello);
+    }
+
+    ns.loadVariable = function () {
+        var selectedVal = this.value;
+        alert(selectedVal);        
     }
 
     ns.testLinearRegression = function () {
