@@ -24,12 +24,23 @@ $(document).ready(function () {
 
     ns.getVariable = function () {
         var selectedVal = this.value;
-        alert('selectedVal: ' + selectedVal);
-        starInstanceNameSpace.fetchJSONFile('/vars/vv_cep.txt', ns.loadVariable);
+        var path = "/vars/" + selectedVal + ".txt";
+        alert('path: ' + path);
+        starInstanceNameSpace.fetchJSONFile(path, ns.loadVariable);
     }
 
     ns.loadVariable = function (data) {
         alert(data.varStar.name);
+        var html = '';
+        html += '<tr><td>' + data.varStar.name + '</td>';
+        html += '<td>' + data.varStar.ra + '</td>';
+        html += '<td>' + data.varStar.de + '</td>';
+        html += '<td id="target_imag></td>';
+        html += '<td id="target_vmag></td>';
+        html += '<td id="target_ferr></td></tr>';
+
+        $('#target tbody').html(html);
+
     }
 
     ns.testLinearRegression = function () {

@@ -24,26 +24,29 @@
         </div>
         <div>
             <label>Target Star Table</label>
-            <table>
+            <table id="target">
                 <thead>
                     <tr>
                         <th>Star</th>
-                        <th>RA&nbsp;&nbsp;D</th>
+                        <th>RA</th>
+                        <th>D</th>
                         <th>I Mag</th>
                         <th>V Mag</th>
                         <th>Linear err</th>
                         <th>Final err</th>
                     </tr>
                 </thead>
+                <tbody></tbody>
             </table>
         </div>
         <div>
             <label>Check Star Table</label>
-            <table>
+            <table id="check">
                 <thead>
                     <tr>
                         <th>Star</th>
-                        <th>RA&nbsp;&nbsp;D</th>
+                        <th>RA</th>
+                        <th>D</th>
                         <th>V Cat</th>
                         <th>Check I Mag</th>
                         <th>Check V Mag</th>
@@ -51,6 +54,7 @@
                         <th>Final err</th>
                     </tr>
                 </thead>
+                <tbody></tbody>
             </table>
         </div>
         <div>
@@ -64,6 +68,25 @@
                     <td>R2:</td>
                     <td id="r2"></td>
                 </tr>                
+            </table>
+        </div>
+        <div>
+            <label>Comparison Star Table</label>
+            <table id="comparison">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Star</th>
+                        <th>RA</th>
+                        <th>D</th>
+                        <th>V Cat</th>
+                        <th>Fit Value</th>
+                        <th>I mag</th>
+                        <th>Error</th>
+                        <th>Final err</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
             </table>
         </div>
         <div>

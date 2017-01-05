@@ -1,2 +1,26 @@
-﻿body {
+﻿* {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-family: Arial;
+}
+
+aside, footer, header, hgroup, nav {
+    display: block;
+}
+
+body {
+    color: #776E65;
+    padding: 10px;
+}
+
+header {
+    position: relative;
+    padding-bottom:20px;
+    top: 0px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 24px;
 }
