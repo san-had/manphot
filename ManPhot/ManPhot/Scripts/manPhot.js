@@ -11,7 +11,7 @@ $(document).ready(function () {
     ns.initialize = function () {
         //$('#btnRefresh').on('click', ns.testLinearRegression);
         $('#btnRefresh').click(ns.load_UU_Aur);
-        $('#varSelector').change(ns.loadVariable);
+        $('#varSelector').change(ns.getVariable);
     }
 
     ns.load_UU_Aur = function () {
@@ -22,9 +22,14 @@ $(document).ready(function () {
         //alert(hello);
     }
 
-    ns.loadVariable = function () {
+    ns.getVariable = function () {
         var selectedVal = this.value;
-        alert(selectedVal);        
+        alert('selectedVal: ' + selectedVal);
+        starInstanceNameSpace.fetchJSONFile('/vars/vv_cep.txt', ns.loadVariable);
+    }
+
+    ns.loadVariable = function (data) {
+        alert(data.varStar.name);
     }
 
     ns.testLinearRegression = function () {

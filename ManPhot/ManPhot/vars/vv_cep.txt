@@ -1,0 +1,27 @@
+﻿{
+    "varStar": {
+        "id": "vv_cep",
+        "name": "VV Cep",
+        "ra": "21:56",
+        "de": "+63:37",
+        "checkstar": {
+            "label": "53",
+            "ra": "22:03",
+            "de": "+63",
+            "vcat": "5.290"
+        },
+        "compstars":  [
+            {
+                "sn": "1",
+                "label": "47",
+                "vcat": "4.730"
+            },
+            {
+                "sn": "2",
+                "label": "53",
+                "vcat": "5.270"
+            }
+        ],
+        "maps": ["VV_Cep_AB","VV_Cep_A"]
+    }
+}
