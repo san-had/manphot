@@ -66,9 +66,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="js\maprotate.js" />
+    <Content Include="map.html" />
+    <Content Include="maps\UU_Aur.png" />
+    <Content Include="maps\VV_Cep_AB.png" />
+    <Content Include="maps\W_Cyg_A.png" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Styles\map.css" />
     <Content Include="vars\vv_cep.txt" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -84,10 +90,10 @@
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
-    <Content Include="Scripts\manPhot.js" />
-    <Content Include="Scripts\objects.txt" />
-    <Content Include="Scripts\variables.js" />
-    <Content Include="Styles\default.css" />
+    <Content Include="js\manPhot.js" />
+    <Content Include="js\objects.txt" />
+    <Content Include="js\variables.js" />
+    <Content Include="Styles\manPhot.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     ns.initialize = function () {
         //$('#btnRefresh').on('click', ns.testLinearRegression);
-        $('#btnRefresh').click(ns.load_UU_Aur);
+        $('#btnRefresh').click(ns.testLinearRegression);
         $('#varSelector').change(ns.getVariable);
     }
 
@@ -20,16 +20,16 @@ $(document).ready(function () {
         alert(vstar.comps[0].label);
         //var hello = get_hello();
         //alert(hello);
-    }
+    };
 
     ns.getVariable = function () {
         var selectedVal = this.value;
         var path = "/vars/" + selectedVal + ".txt";
         alert('path: ' + path);
-        starInstanceNameSpace.fetchJSONFile(path, ns.loadVariable);
+        starInstanceNameSpace.fetchJSONFile(path, ns.loadTarget);
     }
 
-    ns.loadVariable = function (data) {
+    ns.loadTarget = function (data) {
         alert(data.varStar.name);
         var html = '';
         html += '<tr><td>' + data.varStar.name + '</td>';
@@ -41,6 +41,52 @@ $(document).ready(function () {
 
         $('#target tbody').html(html);
 
+        html = '<tr>';
+        for (var i = 0; i < data.varStar.maps.length; i++) {
+            var path = "map.html?mapName=";
+            var mapName = data.varStar.maps[i];
+            path = path + mapName;
+            html += '<td><a href="' + path + '" target="_blank">' + mapName + '</a></td>';
+        }
+        html += '</tr>';
+        $('#maps tbody').html(html);
+
+        ns.loadCheck(data.varStar.checkstar);
+
+        ns.loadComparisons(data.varStar.compstars);
+    }
+
+    ns.loadCheck = function (data) {
+        alert(data.label);
+        alert(data.vcat);
+        var html = '';
+        html += '<tr><td>' + data.label + '</td>';
+        html += '<td>' + data.ra + '</td>';
+        html += '<td>' + data.de + '</td>';
+        html += '<td id="check_vcat">' + data.vcat + '</td>';
+        html += '<td id="check_imag"></td>';
+        html += '<td id="check_vmag"></td>';
+        html += '<td id="check_ferr"></td></tr>';
+
+        $('#check tbody').html(html);
+    }
+
+    ns.loadComparisons = function (data) {
+        var html = '';
+        for (var i = 0; i < data.length; i++) {
+            var comp_id = 'comp_' + data[i].sn;
+            html += '<tr><td>' + data[i].sn + '</td>';
+            html += '<td>' + data[i].label + '</td>';
+            html += '<td>' + data[i].ra + '</td>';
+            html += '<td>' + data[i].de + '</td>';
+            html += '<td id="' + comp_id + '_vcat">' + data[i].vcat + '</td>';
+            html += '<td id="' + comp_id + '_imag"></td>';
+            html += '<td id="' + comp_id + '_vmag"></td>';
+            html += '<td id="' + comp_id + '_err"></td>';
+            html += '<td id="' + comp_id + '_ferr"></td></tr>';
+        }
+
+        $('#comparison tbody').html(html);
     }
 
     ns.testLinearRegression = function () {
