@@ -22,7 +22,7 @@
                 <option value="uu_aur">UU Aur</option>
             </select>
         </div>
-        <div>
+        <div class="tableContainer">
             <label>Target Star Table</label>
             <table id="target">
                 <thead>
@@ -32,14 +32,13 @@
                         <th>D</th>
                         <th>I Mag</th>
                         <th>V Mag</th>
-                        <th>Linear err</th>
-                        <th>Final err</th>
+                        <th>Error</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
-        <div>
+        <div class="tableContainer">
             <label>Check Star Table</label>
             <table id="check">
                 <thead>
@@ -50,16 +49,15 @@
                         <th>V Cat</th>
                         <th>Check I Mag</th>
                         <th>Check V Mag</th>
-                        <th>Linear err</th>
-                        <th>Final err</th>
+                        <th>Error</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
-        <div>
+        <div class="tableContainer">
             <label>Transformation Coefficient output table</label>
-            <table>
+            <table id="lineData">
                 <tr>
                     <td>Slope:</td>
                     <td id="slope"></td>
@@ -70,7 +68,7 @@
                 </tr>                
             </table>
         </div>
-        <div>
+        <div class="tableContainer">
             <label>Comparison Star Table</label>
             <table id="comparison">
                 <thead>
@@ -80,16 +78,15 @@
                         <th>RA</th>
                         <th>D</th>
                         <th>V Cat</th>
-                        <th>Fit Value</th>
                         <th>I mag</th>
+                        <th>Fit Value</th>
                         <th>Error</th>
-                        <th>Final err</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
-        <div>
+        <div class="tableContainer">
             <label>Maps</label>
             <table id="maps">
                 <tbody></tbody>
@@ -98,7 +95,7 @@
         <div>
             <a href="map.html?mapName=UU_Aur" target="_blank">UU Aur</a>
         </div>
-        <div>
+        <div class="tableContainer">
             <button id="btnRefresh">Refresh</button>
         </div>
     </div>

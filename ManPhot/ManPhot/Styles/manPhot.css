@@ -1,7 +1,7 @@
 ﻿* {
     margin: 0;
     padding: 0;
-    font-size: 12px;
+    font-size: 16px;
     font-family: Arial;
 }
 
@@ -21,6 +21,111 @@ header {
     width: 100%;
 }
 
+label {
+    font-family:Arial;
+    font-size:18px;
+    font-weight:bolder
+}
+
+select {
+    font-family: Arial;
+    width:100px;
+}
+
 h1 {
     font-size: 24px;
 }
+
+table {
+    width: 800px;
+}
+
+th {
+    background-color:ActiveBorder;
+    width: 80px;
+}
+
+td {
+    text-align:center;
+    height:25px;
+}
+
+input[type=text] {
+    background-color:lightyellow;
+    width: 98%;
+    height:100%;
+    text-align:right;
+}
+
+.tableContainer {
+    padding-top:20px;
+}
+
+.cord {
+    background-color:lightgreen
+}
+
+.vcat {
+    background-color:lightgreen;
+    font-weight:bolder;
+}
+
+.vcatComp {
+    background-color:lightgreen;
+    font-weight:bolder;
+}
+
+.vmag {
+    font-size:18px;
+    font-weight:bolder;
+    background-color:#ffb400;
+}
+
+.fvmag {
+    background-color:#ffd800;
+}
+
+.id {
+    font-size:18px;
+    font-weight:bolder;
+    color: orangered;
+    background-color:antiquewhite;
+}
+
+.star {
+    font-size:18px;
+    font-weight:bolder;
+    color: darkblue;
+    background-color:antiquewhite;
+}
+
+.error {
+    font-weight:bolder;
+    color: cornflowerblue;
+    background-color: lavender
+}
+
+.targetError {
+    font-size:18px;
+    font-weight:bolder;
+    background-color:#ffb400;
+}
+
+#targetStar {
+    font-size:18px;
+    font-weight:bolder;
+    color: orangered;
+    background-color:antiquewhite;
+}
+
+#lineData td {
+    font-weight:bolder;
+    background-color:antiquewhite;
+}
+
+#r2 {
+    font-size:20px;
+    color: darkblue;
+}
+
+

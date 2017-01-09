@@ -94,6 +94,7 @@
     <Content Include="js\objects.txt" />
     <Content Include="js\variables.js" />
     <Content Include="Styles\manPhot.css" />
+    <Content Include="vars\w_cyg.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

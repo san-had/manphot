@@ -10,7 +10,8 @@ $(document).ready(function () {
 
     ns.initialize = function () {
         //$('#btnRefresh').on('click', ns.testLinearRegression);
-        $('#btnRefresh').click(ns.testLinearRegression);
+        //$('#btnRefresh').click(ns.testLinearRegression);
+        $('#btnRefresh').click(ns.calcLinearRegression);
         $('#varSelector').change(ns.getVariable);
     }
 
@@ -25,19 +26,19 @@ $(document).ready(function () {
     ns.getVariable = function () {
         var selectedVal = this.value;
         var path = "/vars/" + selectedVal + ".txt";
-        alert('path: ' + path);
+       // alert('path: ' + path);
         starInstanceNameSpace.fetchJSONFile(path, ns.loadTarget);
     }
 
     ns.loadTarget = function (data) {
-        alert(data.varStar.name);
+        //alert(data.varStar.name);
         var html = '';
-        html += '<tr><td>' + data.varStar.name + '</td>';
-        html += '<td>' + data.varStar.ra + '</td>';
-        html += '<td>' + data.varStar.de + '</td>';
-        html += '<td id="target_imag></td>';
-        html += '<td id="target_vmag></td>';
-        html += '<td id="target_ferr></td></tr>';
+        html += '<tr><td id="targetStar">' + data.varStar.name + '</td>';
+        html += '<td class="cord">' + data.varStar.ra + '</td>';
+        html += '<td class="cord">' + data.varStar.de + '</td>';
+        html += '<td><input type="text" id="target_imag"/></td>';
+        html += '<td id="target_vmag"  class="vmag"></td>';
+        html += '<td id="target_err" class="targetError"></td></tr>';
 
         $('#target tbody').html(html);
 
@@ -57,16 +58,16 @@ $(document).ready(function () {
     }
 
     ns.loadCheck = function (data) {
-        alert(data.label);
-        alert(data.vcat);
+        //alert(data.label);
+        //alert(data.vcat);
         var html = '';
-        html += '<tr><td>' + data.label + '</td>';
-        html += '<td>' + data.ra + '</td>';
-        html += '<td>' + data.de + '</td>';
-        html += '<td id="check_vcat">' + data.vcat + '</td>';
-        html += '<td id="check_imag"></td>';
-        html += '<td id="check_vmag"></td>';
-        html += '<td id="check_ferr"></td></tr>';
+        html += '<tr><td class="star">' + data.label + '</td>';
+        html += '<td class="cord">' + data.ra + '</td>';
+        html += '<td class="cord">' + data.de + '</td>';
+        html += '<td id="check_vcat" class="vcat">' + data.vcat + '</td>';
+        html += '<td><input type="text" id="check_imag"/></td>';
+        html += '<td id="check_vmag"  class="vmag"></td>';
+        html += '<td id="check_err" class="error"></td></tr>';
 
         $('#check tbody').html(html);
     }
@@ -75,15 +76,14 @@ $(document).ready(function () {
         var html = '';
         for (var i = 0; i < data.length; i++) {
             var comp_id = 'comp_' + data[i].sn;
-            html += '<tr><td>' + data[i].sn + '</td>';
-            html += '<td>' + data[i].label + '</td>';
-            html += '<td>' + data[i].ra + '</td>';
-            html += '<td>' + data[i].de + '</td>';
-            html += '<td id="' + comp_id + '_vcat">' + data[i].vcat + '</td>';
-            html += '<td id="' + comp_id + '_imag"></td>';
-            html += '<td id="' + comp_id + '_vmag"></td>';
-            html += '<td id="' + comp_id + '_err"></td>';
-            html += '<td id="' + comp_id + '_ferr"></td></tr>';
+            html += '<tr><td class="id">' + data[i].sn + '</td>';
+            html += '<td class="star">' + data[i].label + '</td>';
+            html += '<td class="cord">' + data[i].ra + '</td>';
+            html += '<td class="cord">' + data[i].de + '</td>';
+            html += '<td id="' + comp_id + '_vcat" class="vcatComp">' + data[i].vcat + '</td>';
+            html += '<td><input type="text" id="comp_imag_' + comp_id + '"/></td>';
+            html += '<td id="' + comp_id + '_vmag" class="fvmag"></td>';
+            html += '<td id="' + comp_id + '_err" class="error"></td>';
         }
 
         $('#comparison tbody').html(html);
@@ -99,7 +99,17 @@ $(document).ready(function () {
         $('#r2').html(lr.r2);
     }
 
-    ns.linearRegression = function (y, x) {
+    ns.calcLinearRegression = function () {
+        var arrayImags = new Array();
+        var arrayVmags = new Array();
+        var imags = $("input[id^='comp_imag_'").each(function (i, el) {
+            alert(el.toString());
+        });
+        //alert(imags[0].value());
+        var vmags = $('vcatComp');
+    }
+
+    ns.linearRegression = function (y, x) {         //y: imags, x: vmags
 
         var lr = {};
 
@@ -121,6 +131,10 @@ $(document).ready(function () {
         lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
         lr['intercept'] = (sum_y - lr.slope * sum_x) / n;
         lr['r2'] = Math.pow((n * sum_xy - sum_x * sum_y) / Math.sqrt((n * sum_xx - sum_x * sum_x) * (n * sum_yy - sum_y * sum_y)), 2);
+
+        lr['slope'] = Math.round(lr.slope * 1000) / 1000;
+        lr['intercept'] = Math.round(lr.intercept * 1000) / 1000;
+        lr['r2'] = Math.round(lr.r2 * 100000) / 100000;
 
         return lr;
     }
