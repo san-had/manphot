@@ -1,0 +1,12 @@
+﻿- at start load the selected variable
+- at failure reset all calculated values
+- calculate fit errors
+- calculate check mag and error
+- calculate target vmag and error
+- map rotate be able to rotate the map backward (do not need + - buttons)
+- Reset button
+- Save button into local storage
+- display local storage data in a table
+- be able to delete the rows
+- work out final maps
+- work out final JSON files

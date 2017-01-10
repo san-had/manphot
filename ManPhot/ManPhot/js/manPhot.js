@@ -11,7 +11,7 @@ $(document).ready(function () {
     ns.initialize = function () {
         //$('#btnRefresh').on('click', ns.testLinearRegression);
         //$('#btnRefresh').click(ns.testLinearRegression);
-        $('#btnRefresh').click(ns.calcLinearRegression);
+        $('#btnRefresh').click(ns.refreshData);
         $('#varSelector').change(ns.getVariable);
     }
 
@@ -99,14 +99,93 @@ $(document).ready(function () {
         $('#r2').html(lr.r2);
     }
 
+    ns.refreshData = function () {
+        ns.calcLinearRegression();        
+        ns.calcFitValues();
+    }
+
     ns.calcLinearRegression = function () {
         var arrayImags = new Array();
         var arrayVmags = new Array();
-        var imags = $("input[id^='comp_imag_'").each(function (i, el) {
-            alert(el.toString());
+        var failure = false;
+
+        $("input[id^='comp_imag_'").each(function (i, el) {
+            if ($(el).val() != '') {
+                var comp_id = '#comp_' + $(el).attr('id').substr(15) + "_vcat";
+                var imag = $(el).val().replace(',', '.');
+                if (isNaN(imag)) {
+                    alert("Wrong Imag value: " + imag + " at index: " + i);
+                    failure = true;
+                } else {
+                    arrayImags.push(Number(imag));
+                }
+                var vcat = $(comp_id).html().replace(',', '.');
+                if (isNaN(vcat)) {
+                    alert("Wrong VCat value: " + vcat + " at index: " + i);
+                    failure = true;
+                } else {
+                    arrayVmags.push(Number(vcat));
+                }
+            }
         });
-        //alert(imags[0].value());
-        var vmags = $('vcatComp');
+
+        if (failure) {
+            alert("Wrong data entry, no calculation performed!");
+            return failure;
+        }
+
+        if ( arrayImags.length < 2 ) {
+            alert("Few data entry, add more Imag values!");
+            return failure;
+        }
+
+        if (arrayVmags.length < 2) {
+            alert("Few Vcat data, define more Vcat values!");
+            return failure;
+        }
+
+        var lr = ns.linearRegression(arrayImags, arrayVmags);
+        $('#slope').html(lr.slope);
+        $('#intercept').html(lr.intercept);
+        $('#r2').html(lr.r2);
+
+        return failure;
+    }
+
+    ns.calcFitValues = function () {
+        var slope = $('#slope').html();
+        var intercept = $('#intercept').html();
+        var failure;
+
+        $("input[id^='comp_imag_'").each(function (i, el) {
+            failure = false;
+            if ($(el).val() != '') {
+                var comp_id = '#comp_' + $(el).attr('id').substr(15) + "_vcat";
+                var fit_id = '#comp_' + $(el).attr('id').substr(15) + "_vmag";
+                var imag = $(el).val().replace(',', '.');
+                if (isNaN(imag)) {
+                    failure = true;
+                } 
+                var vcat = $(comp_id).html().replace(',', '.');
+                if (isNaN(vcat)) {
+                    failure = true;
+                }
+                if (!failure) {
+                    var fitValue = (imag - intercept) / slope;
+                    fitValue = Math.round(fitValue * 100) / 100;
+                    $(fit_id).html(fitValue);
+                }
+                else {
+                    ns.resetSlopeValues();
+                }
+            }
+        });
+    }
+
+    ns.resetSlopeValues = function () {
+        $('#slope').html('');
+        $('#intercept').html('');
+        $('#r2').html('');
     }
 
     ns.linearRegression = function (y, x) {         //y: imags, x: vmags
@@ -122,10 +201,10 @@ $(document).ready(function () {
 
         for (var i = 0; i < y.length; i++) {
             sum_x += Number(x[i]);
-            sum_y += y[i];
-            sum_xy += (x[i] * y[i]);
-            sum_xx += (x[i] * x[i]);
-            sum_yy += (y[i] * y[i]);
+            sum_y += Number(y[i]);
+            sum_xy += (Number(x[i]) * Number(y[i]));
+            sum_xx += (Number(x[i]) * Number(x[i]));
+            sum_yy += (Number(y[i]) * Number(y[i]));
         }
 
         lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
