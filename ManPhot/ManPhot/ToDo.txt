@@ -1,12 +1,17 @@
-﻿- at start load the selected variable
-- at failure reset all calculated values
-- calculate fit errors
-- calculate check mag and error
-- calculate target vmag and error
+﻿	- at start load the selected variable
+	- at failure reset only slope values
+	- calculate fit errors
+	- calculate check mag and error
+	- calculate target vmag and error
 - map rotate be able to rotate the map backward (do not need + - buttons)
-- Reset button
+	- Reset button
+- add date and time entry
+- add JD calculation
+- add standard info into the js file
 - Save button into local storage
 - display local storage data in a table
+- try to find solution to copy the result table into the clipboard
 - be able to delete the rows
 - work out final maps
 - work out final JSON files
+- write tests for slope calculations

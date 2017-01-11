@@ -57,8 +57,19 @@ input[type=text] {
     text-align:right;
 }
 
+button {
+    width: 100px;
+    background-color:aliceblue;
+    border: inset;
+}
+
 .tableContainer {
     padding-top:20px;
+}
+
+.buttonContainer {
+    float: left;
+    width: 200px;
 }
 
 .cord {
@@ -126,6 +137,10 @@ input[type=text] {
 #r2 {
     font-size:20px;
     color: darkblue;
+}
+
+#btnReset {
+    background-color:#e8acca
 }
 
 

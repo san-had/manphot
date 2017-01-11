@@ -12,7 +12,17 @@ $(document).ready(function () {
         //$('#btnRefresh').on('click', ns.testLinearRegression);
         //$('#btnRefresh').click(ns.testLinearRegression);
         $('#btnRefresh').click(ns.refreshData);
-        $('#varSelector').change(ns.getVariable);
+        $('#btnReset').click(function () {
+            var proceed = confirm('Are you sure?');
+            if (proceed) {
+                ns.reset();
+            }
+        });
+        $('#varSelector').change(function () {
+            var selectedVal = this.value;
+            ns.loadVariable(selectedVal);
+        });
+        ns.loadVariable($('#varSelector').val());        
     }
 
     ns.load_UU_Aur = function () {
@@ -27,6 +37,11 @@ $(document).ready(function () {
         var selectedVal = this.value;
         var path = "/vars/" + selectedVal + ".txt";
        // alert('path: ' + path);
+        starInstanceNameSpace.fetchJSONFile(path, ns.loadTarget);
+    }
+
+    ns.loadVariable = function (selectedVal) {
+        var path = "/vars/" + selectedVal + ".txt";
         starInstanceNameSpace.fetchJSONFile(path, ns.loadTarget);
     }
 
@@ -55,6 +70,8 @@ $(document).ready(function () {
         ns.loadCheck(data.varStar.checkstar);
 
         ns.loadComparisons(data.varStar.compstars);
+
+        ns.dataEntry();
     }
 
     ns.loadCheck = function (data) {
@@ -81,7 +98,7 @@ $(document).ready(function () {
             html += '<td class="cord">' + data[i].ra + '</td>';
             html += '<td class="cord">' + data[i].de + '</td>';
             html += '<td id="' + comp_id + '_vcat" class="vcatComp">' + data[i].vcat + '</td>';
-            html += '<td><input type="text" id="comp_imag_' + comp_id + '"/></td>';
+            html += '<td><input type="text" id="comp_imag_' + data[i].sn + '"/></td>';
             html += '<td id="' + comp_id + '_vmag" class="fvmag"></td>';
             html += '<td id="' + comp_id + '_err" class="error"></td>';
         }
@@ -111,7 +128,7 @@ $(document).ready(function () {
 
         $("input[id^='comp_imag_'").each(function (i, el) {
             if ($(el).val() != '') {
-                var comp_id = '#comp_' + $(el).attr('id').substr(15) + "_vcat";
+                var comp_id = '#comp_' + $(el).attr('id').substr(10) + "_vcat";
                 var imag = $(el).val().replace(',', '.');
                 if (isNaN(imag)) {
                     alert("Wrong Imag value: " + imag + " at index: " + i);
@@ -156,12 +173,15 @@ $(document).ready(function () {
         var slope = $('#slope').html();
         var intercept = $('#intercept').html();
         var failure;
+        var summ_error = 0;
+        var num = 0;
 
         $("input[id^='comp_imag_'").each(function (i, el) {
             failure = false;
             if ($(el).val() != '') {
-                var comp_id = '#comp_' + $(el).attr('id').substr(15) + "_vcat";
-                var fit_id = '#comp_' + $(el).attr('id').substr(15) + "_vmag";
+                var comp_id = '#comp_' + $(el).attr('id').substr(10) + "_vcat";
+                var fit_id = '#comp_' + $(el).attr('id').substr(10) + "_vmag";
+                var error_id = '#comp_' + $(el).attr('id').substr(10) + "_err";
                 var imag = $(el).val().replace(',', '.');
                 if (isNaN(imag)) {
                     failure = true;
@@ -172,20 +192,79 @@ $(document).ready(function () {
                 }
                 if (!failure) {
                     var fitValue = (imag - intercept) / slope;
-                    fitValue = Math.round(fitValue * 100) / 100;
+                    fitValue = Math.round(fitValue * 1000) / 1000;
                     $(fit_id).html(fitValue);
+
+                    var error = fitValue - vcat;
+                    error = Math.round(error * 1000) / 1000;
+                    $(error_id).html(error);
+                    summ_error += Math.abs(error);
+                    num += 1;
                 }
                 else {
                     ns.resetSlopeValues();
                 }
             }
         });
+
+        if (!failure) {
+            var checkVcat = $('#check_vcat').html();
+            var checkImag = $('#check_imag').val().replace(',', '.');
+            var checkVmag = (checkImag - intercept) / slope;
+            checkVmag = Math.round(checkVmag * 1000) / 1000;
+            $('#check_vmag').html(checkVmag);
+            var checkError = checkVmag - checkVcat;
+            checkError = Math.round(checkError * 1000) / 1000;
+            $('#check_err').html(checkError);
+
+            var targetImag = $('#target_imag').val().replace(',', '.');
+            var targetVmag = (targetImag - intercept) / slope;
+            targetVmag = Math.round(targetVmag * 1000) / 1000;
+            $('#target_vmag').html(targetVmag);
+
+            var targetError = summ_error / num;
+            targetError = Math.round(targetError * 1000) / 1000;
+            $('#target_err').html(targetError);
+
+        }
+    }
+
+    ns.dataEntry = function () {
+        $('#comp_imag_1').val('-13.500');
+        $('#comp_imag_2').val('-13.000');
+        $('#comp_imag_3').val('-12.950');
+
+        $('#check_imag').val('-12.980');
+        $('#target_imag').val('-12.957');
+
     }
 
     ns.resetSlopeValues = function () {
         $('#slope').html('');
         $('#intercept').html('');
         $('#r2').html('');
+    }
+
+    ns.reset = function () {
+        ns.resetSlopeValues();
+
+        $("input[id^='comp_imag_'").each(function (i, el) {
+            $(el).val('');
+        });
+        $('.fvmag').each(function (i, el) {
+            $(el).html('');
+        });
+        $('.err').each(function (i, el) {
+            $(el).html('');
+        });
+
+        $('#check_imag').val('');
+        $('#check_vmag').html('');
+        $('#check_err').html('');
+
+        $('#target_imag').val('');
+        $('#target_vmag').html('');
+        $('#target_err').html('');
     }
 
     ns.linearRegression = function (y, x) {         //y: imags, x: vmags
