@@ -13,7 +13,7 @@ $(document).ready(function () {
     ns.initialize = function () {
         $('#btnPlus').on('click', rotatePlus);
         $('#btnMinus').on('click', rotateMinus);
-        $('#imgMap').on('click', rotatePlus);
+        $('#imgMap').on('click', rotate);
         $('#txtDegree').val(30);
 
         var mapName = getQueryVariable("mapName");
@@ -21,8 +21,14 @@ $(document).ready(function () {
             mapName = "UU_Aur";
         }
 
-        loadMapImage(mapName);
+        loadMapImage(mapName);        
     };
+
+    function rotate(event) {
+        var imgWidth = $('#imgMap').width();
+        var xPos = event.clientX;
+        xPos > (imgWidth / 2) ? rotatePlus() : rotateMinus();
+    }
 
     function rotatePlus() {
         degree += Number($('#txtDegree').val());

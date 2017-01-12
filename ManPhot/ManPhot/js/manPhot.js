@@ -11,6 +11,26 @@ $(document).ready(function () {
     ns.initialize = function () {
         //$('#btnRefresh').on('click', ns.testLinearRegression);
         //$('#btnRefresh').click(ns.testLinearRegression);
+        $('#obsDate').datepicker();
+        $('#obsDate').change(function () {
+            var dateArray = $('#obsDate').val().split('/');
+            var formatted = dateArray[2] + ':' + dateArray[0] + ':' + dateArray[1]
+            $('#obsDate').val(formatted);
+        });
+        $('#obsHour').change(function () {
+            var hour = $('#obsHour').val();
+            if (isNaN(hour) || hour > 23 || hour.toString().length > 2 ) {
+                alert("Invalid hour!");
+                $('#obsHour').val('');
+            }
+        });
+        $('#obsMin').change(function () {
+            var min = $('#obsMin').val();
+            if (isNaN(min) || min > 59 || min.toString().length > 2) {
+                alert("Invalid minute!");
+                $('#obsMin').val('');
+            }
+        });
         $('#btnRefresh').click(ns.refreshData);
         $('#btnReset').click(function () {
             var proceed = confirm('Are you sure?');
@@ -18,8 +38,12 @@ $(document).ready(function () {
                 ns.reset();
             }
         });
+        $('#btnSave').click(function () {
+            ns.showJulianDate();
+        });
         $('#varSelector').change(function () {
             var selectedVal = this.value;
+            $('#obsMin').val('');
             ns.loadVariable(selectedVal);
         });
         ns.loadVariable($('#varSelector').val());        
@@ -229,6 +253,22 @@ $(document).ready(function () {
         }
     }
 
+    ns.showJulianDate = function () {
+        var obsDate = $('#obsDate').val();
+        var hour = $('#obsHour').val();
+        var minute = $('#obsMin').val();
+
+        if (obsDate.length > 0 && hour.length > 0 && minute.length > 0) {
+            var dateArray = obsDate.split(':');
+            var year = dateArray[0];
+            var month = dateArray[1] - 1;
+            var day = dateArray[2];
+
+            var date = new Date(year, month, day, hour, minute, 0, 0);
+            $('#jd').html(date.getJulian());
+        }
+    }
+
     ns.dataEntry = function () {
         $('#comp_imag_1').val('-13.500');
         $('#comp_imag_2').val('-13.000');
@@ -298,3 +338,8 @@ $(document).ready(function () {
     }
 
 })();
+
+Date.prototype.getJulian = function () {
+    var jd = (this / 86400000) - (this.getTimezoneOffset() / 1440) + 2440587.5;
+    return Math.round( jd * 100 ) / 100;
+}

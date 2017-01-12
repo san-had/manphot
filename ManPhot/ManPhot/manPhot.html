@@ -4,7 +4,9 @@
     <title></title>
 	<meta charset="utf-8" />
     <link href="Styles/manPhot.css" rel="stylesheet" />
+    <link href="Styles/jquery-ui.css" rel="stylesheet" />
     <script src="Scripts/jquery-3.1.1.js"></script>
+    <script src="Scripts/jquery-ui-1.12.1.js"></script>
     <script src="js/variables.js"></script>
     <script src="js/manPhot.js"></script>
 </head>
@@ -15,12 +17,29 @@
                 <h1>Report Title</h1>
             </hgroup>
         </header>
-        <div>
-            <select id="varSelector">
-                <option value="vv_cep">VV Cep</option>
-                <option value="w_cyg">W Cyg</option>
-                <option value="uu_aur">UU Aur</option>
-            </select>
+        <div class="inputContainer">
+            <div class="inputElementsContainer">
+                <select id="varSelector">
+                    <option value="vv_cep">VV Cep</option>
+                    <option value="w_cyg">W Cyg</option>
+                    <option value="uu_aur">UU Aur</option>
+                </select>
+            </div>
+            <div class="inputElementsContainer">
+                <label>Date:</label>
+                <input type="text" id="obsDate" value="" />
+            </div>
+            <div class="inputElementsContainer">
+                <label>Hour:</label>
+                <input type="text" id="obsHour" value="" />
+            </div>
+            <div class="inputElementsContainer">
+                <label>Minutes:</label>
+                <input type="text" id="obsMin" value="" />
+            </div>
+            <div class="inputElementsContainer">
+                <label>JD:&nbsp;<span id="jd"></span></label>
+            </div>
         </div>
         <div class="tableContainer">
             <label>Target Star Table</label>
@@ -98,6 +117,9 @@
         <div class="tableContainer">
             <div class="buttonContainer">
                 <button id="btnReset">Reset</button>
+            </div>
+            <div class="buttonContainer">
+                <button id="btnSave">Save</button>
             </div>
             <div class ="buttonContainer">
                 <button id="btnRefresh">Refresh</button>

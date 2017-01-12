@@ -3,9 +3,9 @@
 	- calculate fit errors
 	- calculate check mag and error
 	- calculate target vmag and error
-- map rotate be able to rotate the map backward (do not need + - buttons)
+	- map rotate be able to rotate the map backward (do not need + - buttons)
 	- Reset button
-- add date and time entry
+	- add date and time entry
 - add JD calculation
 - add standard info into the js file
 - Save button into local storage
