@@ -33,6 +33,8 @@
                 "vcat": "5.35"
             }
         ],
-        "maps": ["VV_Cep_AB","VV_Cep_A"]
+        "maps": ["VV_Cep_AB","VV_Cep_A"],
+		"mapid": "X15865XU",
+		"comment": "DSLR Canon 1100D"
     }
 }

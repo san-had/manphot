@@ -132,6 +132,10 @@ button {
     background-color:#ffb400;
 }
 
+.text{
+  mso-number-format:"\@";/*force text*/
+}
+
 input[name=dateTimeInput] {
     width:90px;
 }

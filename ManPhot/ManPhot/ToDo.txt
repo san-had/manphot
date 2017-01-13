@@ -6,12 +6,14 @@
 	- map rotate be able to rotate the map backward (do not need + - buttons)
 	- Reset button
 	- add date and time entry
-- add JD calculation
-- add standard info into the js file
-- Save button into local storage
+	- add JD calculation
+	- add standard info into the js file
+	- Save button into local storage
+- add button to delete all of the records from the storage
 - display local storage data in a table
 - try to find solution to copy the result table into the clipboard
-- be able to delete the rows
+	- be able to delete the rows
+- write tests for slope calculations
+- below check star table the exploration row
 - work out final maps
 - work out final JSON files
-- write tests for slope calculations

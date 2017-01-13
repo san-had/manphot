@@ -8,6 +8,10 @@ $(document).ready(function () {
     this.manPhotNamespace = this.manPhotNamespace || {};
     var ns = this.manPhotNamespace;
 
+    var checkStarLabel = "";
+    var targetMap = "";
+    var targetComment = "";
+
     ns.initialize = function () {
         //$('#btnRefresh').on('click', ns.testLinearRegression);
         //$('#btnRefresh').click(ns.testLinearRegression);
@@ -39,14 +43,28 @@ $(document).ready(function () {
             }
         });
         $('#btnSave').click(function () {
-            ns.showJulianDate();
+            if ($('#target_vmag').html().length > 0) {
+                ns.saveVariable();
+            } else {
+                alert("Please do calculation before save!");
+            }
         });
         $('#varSelector').change(function () {
             var selectedVal = this.value;
             $('#obsMin').val('');
             ns.loadVariable(selectedVal);
         });
-        ns.loadVariable($('#varSelector').val());        
+        ns.loadVariable($('#varSelector').val());
+
+        if (!ns.isWebStorageSupported()) {
+            alert("Your browser does not support localStorage, you could not save final result!")
+        }
+        
+        ns.bindToGrid();
+    }
+
+    ns.isWebStorageSupported = function() {
+        return 'localStorage' in window;
     }
 
     ns.load_UU_Aur = function () {
@@ -70,7 +88,10 @@ $(document).ready(function () {
     }
 
     ns.loadTarget = function (data) {
-        //alert(data.varStar.name);
+
+        targetMap = data.varStar.mapid;
+        targetComment = data.varStar.comment;
+
         var html = '';
         html += '<tr><td id="targetStar">' + data.varStar.name + '</td>';
         html += '<td class="cord">' + data.varStar.ra + '</td>';
@@ -99,8 +120,9 @@ $(document).ready(function () {
     }
 
     ns.loadCheck = function (data) {
-        //alert(data.label);
-        //alert(data.vcat);
+
+        checkStarLabel = data.label;
+
         var html = '';
         html += '<tr><td class="star">' + data.label + '</td>';
         html += '<td class="cord">' + data.ra + '</td>';
@@ -141,8 +163,11 @@ $(document).ready(function () {
     }
 
     ns.refreshData = function () {
-        ns.calcLinearRegression();        
-        ns.calcFitValues();
+        var proceed = ns.showJulianDate();
+        if (proceed) {
+            ns.calcLinearRegression();
+            ns.calcFitValues();
+        }
     }
 
     ns.calcLinearRegression = function () {
@@ -254,6 +279,7 @@ $(document).ready(function () {
     }
 
     ns.showJulianDate = function () {
+        var isShown = false;
         var obsDate = $('#obsDate').val();
         var hour = $('#obsHour').val();
         var minute = $('#obsMin').val();
@@ -266,7 +292,12 @@ $(document).ready(function () {
 
             var date = new Date(year, month, day, hour, minute, 0, 0);
             $('#jd').html(date.getJulian());
+            isShown = true;
         }
+        else {
+            alert("Please add the observation date and time!");
+        }
+        return isShown;
     }
 
     ns.dataEntry = function () {
@@ -337,6 +368,94 @@ $(document).ready(function () {
         return lr;
     }
 
+    ns.saveVariable = function () {
+
+        var hour = $('#obsHour').val().length == 1 ? "0" + $('#obsHour').val() : $('#obsHour').val();
+        var minute = $('#obsMin').val().length == 1 ? "0" + $('#obsMin').val() : $('#obsMin').val();
+
+        var vmag = $('#target_vmag').html();
+        var error = $('#target_err').html();
+        var checkVmag = $('#check_vmag').html();
+
+        vmag = Math.round(vmag * 100) / 100; 
+        error = Math.round(error * 100) / 100;
+        checkVmag = Math.round(checkVmag * 100) / 100;
+
+        var key = $('#varSelector').val() + '_' + $('#obsDate').val().replace(/:/g, '');
+        var varStar = {};
+        varStar.id = key;
+        varStar.name = $('#varSelector option:selected').text();
+        varStar.jd = $('#jd').html();
+        varStar.date = $('#obsDate').val().replace(/:/g,'.');
+        varStar.time = hour + ":" + minute;
+        varStar.vmag = vmag;
+        varStar.err = error;
+        varStar.tg = "TG";
+        varStar.no = "NO";
+        varStar.std = "STD";
+        varStar.ensemble = "ENSEMBLE";
+        varStar.na = "na";
+        varStar.checklabel = checkStarLabel;
+        varStar.checkvmag = checkVmag;
+        varStar.mapid = targetMap;
+        varStar.comment = targetComment;
+
+        var results = ns.retrieveFromStorage();
+
+        results.push(varStar);
+
+        localStorage.setItem('varstars', JSON.stringify(results));
+
+        ns.bindToGrid();
+    }
+
+    ns.retrieveFromStorage = function() {
+        var varstarsJSON = localStorage.getItem('varstars');
+        return varstarsJSON ? JSON.parse(varstarsJSON) : [];
+    }
+
+    ns.bindToGrid = function () {
+        var results = ns.retrieveFromStorage();
+        var html = '';
+
+        for (var i = 0; i < results.length; i++) {
+            var star = results[i];
+            html += '<tr><td>&nbsp;&nbsp;</td>';
+            html += '<td>' + star.name + '</td>';
+            html += '<td>' + star.jd + '</td>';
+            html += '<td>' + star.date + '</td>';
+            html += '<td class="text">' + star.time + '</td>';
+            html += '<td class="text">' + star.vmag + '</td>';
+            html += '<td class="text">' + star.err + '</td>';
+            html += '<td>' + star.tg + '</td>';
+            html += '<td>' + star.no + '</td>';
+            html += '<td>' + star.std + '</td>';
+            html += '<td>' + star.ensemble + '</td>';
+            html += '<td>' + star.na + '</td>';
+            html += '<td>' + star.checklabel + '</td>';
+            html += '<td class="text">' + star.checkvmag + '</td>';
+            html += '<td>' + star.mapid + '</td>';
+            html += '<td>' + star.comment + '</td>';
+
+            html += '<td><a class="delete" href="javascript:void(0)" data-key=' + i + '>Delete</a></td></tr>';
+        }
+        html = html || '<tr><td colspan="16">No records available</td></tr>';
+        $('#varstars tbody').html(html);
+        $('#varstars a.delete').click(ns.deleteVarStar);
+    }
+
+    ns.deleteVarStar = function () {        
+        var key = parseInt($(this).attr('data-key'));
+        
+        var results = ns.retrieveFromStorage();
+        var confirmText = "Are you sure about deleting of " + results[key].id + "?";
+        var isConfirmed = confirm(confirmText);
+        if (isConfirmed) {
+            results.splice(key, 1);
+            localStorage.setItem('varstars', JSON.stringify(results));
+            ns.bindToGrid();
+        }
+    }
 })();
 
 Date.prototype.getJulian = function () {
