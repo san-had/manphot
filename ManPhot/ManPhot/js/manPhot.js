@@ -42,6 +42,12 @@ $(document).ready(function () {
                 ns.reset();
             }
         });
+        $('#btnDelete').click(function () {
+            var proceed = confirm('Are you sure about deleting all of the records?');
+            if (proceed) {
+                ns.deleteAll();
+            }
+        });
         $('#btnSave').click(function () {
             if ($('#target_vmag').html().length > 0) {
                 ns.saveVariable();
@@ -455,6 +461,11 @@ $(document).ready(function () {
             localStorage.setItem('varstars', JSON.stringify(results));
             ns.bindToGrid();
         }
+    }
+
+    ns.deleteAll = function () {
+        localStorage.removeItem('varstars');
+        ns.bindToGrid();
     }
 })();
 
