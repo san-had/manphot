@@ -13,7 +13,7 @@
 	- display local storage data in a table
 	- try to find solution to copy the result table into the clipboard
 	- be able to delete the rows
-- write tests for slope calculations
+	- write tests for slope calculations
 	- below check star table the exploration row ???
 - work out final maps
 - work out final JSON files

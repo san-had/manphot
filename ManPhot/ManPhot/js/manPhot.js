@@ -1,20 +1,21 @@
 ﻿/// <reference path="jquery-3.1.1.js" />
 
 $(document).ready(function () {
-    manPhotNamespace.initialize();
+    manPhotNamespace.initialize();    
 });
 
 (function () {
     this.manPhotNamespace = this.manPhotNamespace || {};
     var ns = this.manPhotNamespace;
 
+    var slope = 0;
+    var intercept = 0;
+
     var checkStarLabel = "";
     var targetMap = "";
     var targetComment = "";
 
     ns.initialize = function () {
-        //$('#btnRefresh').on('click', ns.testLinearRegression);
-        //$('#btnRefresh').click(ns.testLinearRegression);
         $('#obsDate').datepicker();
         $('#obsDate').change(function () {
             var dateArray = $('#obsDate').val().split('/');
@@ -73,21 +74,6 @@ $(document).ready(function () {
         return 'localStorage' in window;
     }
 
-    ns.load_UU_Aur = function () {
-        var vstar = starInstanceNameSpace.get_UU_Aur();
-        alert(vstar.name);
-        alert(vstar.comps[0].label);
-        //var hello = get_hello();
-        //alert(hello);
-    };
-
-    ns.getVariable = function () {
-        var selectedVal = this.value;
-        var path = "/vars/" + selectedVal + ".txt";
-       // alert('path: ' + path);
-        starInstanceNameSpace.fetchJSONFile(path, ns.loadTarget);
-    }
-
     ns.loadVariable = function (selectedVal) {
         var path = "/vars/" + selectedVal + ".txt";
         starInstanceNameSpace.fetchJSONFile(path, ns.loadTarget);
@@ -121,8 +107,6 @@ $(document).ready(function () {
         ns.loadCheck(data.varStar.checkstar);
 
         ns.loadComparisons(data.varStar.compstars);
-
-        ns.dataEntry();
     }
 
     ns.loadCheck = function (data) {
@@ -156,16 +140,6 @@ $(document).ready(function () {
         }
 
         $('#comparison tbody').html(html);
-    }
-
-    ns.testLinearRegression = function () {
-        var known_x = [5.020, 4.974, 6.016, 6.206, 6.483, 6.626];
-        var known_y = [-13.287, -13.349, -12.229, -12.063, -11.744, -11.592];
-
-        var lr = ns.linearRegression(known_y, known_x);
-        $('#slope').html(lr.slope);
-        $('#intercept').html(lr.intercept);
-        $('#r2').html(lr.r2);
     }
 
     ns.refreshData = function () {
@@ -225,8 +199,6 @@ $(document).ready(function () {
     }
 
     ns.calcFitValues = function () {
-        var slope = $('#slope').html();
-        var intercept = $('#intercept').html();
         var failure;
         var summ_error = 0;
         var num = 0;
@@ -307,12 +279,13 @@ $(document).ready(function () {
     }
 
     ns.dataEntry = function () {
-        $('#comp_imag_1').val('-13.500');
-        $('#comp_imag_2').val('-13.000');
-        $('#comp_imag_3').val('-12.950');
+        $('#comp_imag_1').val('-13.362');
+        $('#comp_imag_2').val('-12.764');
+        $('#comp_imag_3').val('-12.687');
+        $('#comp_imag_4').val('-11.376');
 
-        $('#check_imag').val('-12.980');
-        $('#target_imag').val('-12.957');
+        $('#check_imag').val('-12.772');
+        $('#target_imag').val('-12.912');
 
     }
 
@@ -366,6 +339,9 @@ $(document).ready(function () {
         lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
         lr['intercept'] = (sum_y - lr.slope * sum_x) / n;
         lr['r2'] = Math.pow((n * sum_xy - sum_x * sum_y) / Math.sqrt((n * sum_xx - sum_x * sum_x) * (n * sum_yy - sum_y * sum_y)), 2);
+
+        slope = lr.slope;
+        intercept = lr.intercept;
 
         lr['slope'] = Math.round(lr.slope * 1000) / 1000;
         lr['intercept'] = Math.round(lr.intercept * 1000) / 1000;

@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\qunit.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -108,10 +109,27 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="js\maprotate.js" />
+    <Content Include="js\tests.js" />
     <Content Include="map.html" />
+    <Content Include="maps\RY_UMA_Aspec.png" />
+    <Content Include="maps\R_Boo_AB.png" />
+    <Content Include="maps\R_Crb_B.png" />
+    <Content Include="maps\R_Gem_B.png" />
+    <Content Include="maps\R_Tri_B.png" />
+    <Content Include="maps\SS_Vir_A.png" />
+    <Content Include="maps\SS_Vir_B.png" />
+    <Content Include="maps\S_Cep_A.png" />
+    <Content Include="maps\S_Cep_B.png" />
+    <Content Include="maps\S_Uma.png" />
+    <Content Include="maps\T_Cep.png" />
+    <Content Include="maps\T_Cep_B.png" />
     <Content Include="maps\UU_Aur.png" />
+    <Content Include="maps\U_Mon_A.png" />
+    <Content Include="maps\U_Mon_B.png" />
     <Content Include="maps\VV_Cep_AB.png" />
+    <Content Include="maps\V_Boo_B.png" />
     <Content Include="maps\W_Cyg_A.png" />
+    <Content Include="maps\Z_Uma_Bspec.png" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
@@ -119,9 +137,12 @@
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery-ui-timepicker-addon.js" />
     <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\qunit.js" />
     <Content Include="Styles\jquery-ui.css" />
     <Content Include="Styles\map.css" />
+    <Content Include="test.html" />
     <Content Include="ToDo.txt" />
+    <Content Include="vars\test_vv_cep.txt" />
     <Content Include="vars\vv_cep.txt" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
