@@ -88,7 +88,7 @@ $(document).ready(function () {
         html += '<tr><td id="targetStar">' + data.varStar.name + '</td>';
         html += '<td class="cord">' + data.varStar.ra + '</td>';
         html += '<td class="cord">' + data.varStar.de + '</td>';
-        html += '<td><input type="text" id="target_imag"/></td>';
+        html += '<td><input type="number" id="target_imag"/></td>';
         html += '<td id="target_vmag"  class="vmag"></td>';
         html += '<td id="target_err" class="targetError"></td></tr>';
 
@@ -118,7 +118,7 @@ $(document).ready(function () {
         html += '<td class="cord">' + data.ra + '</td>';
         html += '<td class="cord">' + data.de + '</td>';
         html += '<td id="check_vcat" class="vcat">' + data.vcat + '</td>';
-        html += '<td><input type="text" id="check_imag"/></td>';
+        html += '<td><input type="number" id="check_imag"/></td>';
         html += '<td id="check_vmag"  class="vmag"></td>';
         html += '<td id="check_err" class="error"></td></tr>';
 
@@ -134,7 +134,7 @@ $(document).ready(function () {
             html += '<td class="cord">' + data[i].ra + '</td>';
             html += '<td class="cord">' + data[i].de + '</td>';
             html += '<td id="' + comp_id + '_vcat" class="vcatComp">' + data[i].vcat + '</td>';
-            html += '<td><input type="text" id="comp_imag_' + data[i].sn + '"/></td>';
+            html += '<td><input type="number" id="comp_imag_' + data[i].sn + '"/></td>';
             html += '<td id="' + comp_id + '_vmag" class="fvmag"></td>';
             html += '<td id="' + comp_id + '_err" class="error"></td>';
         }

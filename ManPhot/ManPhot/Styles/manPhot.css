@@ -50,7 +50,7 @@ td {
     height:25px;
 }
 
-input[type=text] {
+input[type=text], input[type=number] {
     background-color:lightyellow;
     width: 98%;
     height:100%;
@@ -65,11 +65,12 @@ button {
 
 .tableContainer {
     padding-top:30px;
+    width:100%;
 }
 
 .buttonContainer {
     float: left;
-    width: 20%;
+    width: 13%;
 }
 
 .inputContainer {
