@@ -143,6 +143,8 @@
     <Content Include="test.html" />
     <Content Include="ToDo.txt" />
     <Content Include="vars\test_vv_cep.txt" />
+    <Content Include="vars\uu_aur.txt" />
+    <Content Include="vars\u_mon.txt" />
     <Content Include="vars\vv_cep.txt" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

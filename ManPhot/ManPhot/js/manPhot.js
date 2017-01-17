@@ -315,6 +315,7 @@ $(document).ready(function () {
         $('#target_imag').val('');
         $('#target_vmag').html('');
         $('#target_err').html('');
+        $('#obsMin').val('');
     }
 
     ns.linearRegression = function (y, x) {         //y: imags, x: vmags

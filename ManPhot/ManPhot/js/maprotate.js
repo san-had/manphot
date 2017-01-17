@@ -17,6 +17,7 @@ $(document).ready(function () {
         $('#txtDegree').val(30);
 
         var mapName = getQueryVariable("mapName");
+        document.title = mapName;
         if (mapName === undefined) {
             mapName = "UU_Aur";
         }
