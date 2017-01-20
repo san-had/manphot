@@ -155,7 +155,7 @@ $(document).ready(function () {
         var arrayVmags = new Array();
         var failure = false;
 
-        $("input[id^='comp_imag_'").each(function (i, el) {
+        $("input[id^='comp_imag_']").each(function (i, el) {
             if ($(el).val() != '') {
                 var comp_id = '#comp_' + $(el).attr('id').substr(10) + "_vcat";
                 var imag = $(el).val().replace(',', '.');
@@ -203,12 +203,12 @@ $(document).ready(function () {
         var summ_error = 0;
         var num = 0;
 
-        $("input[id^='comp_imag_'").each(function (i, el) {
+        $("input[id^='comp_imag_']").each(function (i, el) {
             failure = false;
+            var comp_id = '#comp_' + $(el).attr('id').substr(10) + "_vcat";
+            var fit_id = '#comp_' + $(el).attr('id').substr(10) + "_vmag";
+            var error_id = '#comp_' + $(el).attr('id').substr(10) + "_err";
             if ($(el).val() != '') {
-                var comp_id = '#comp_' + $(el).attr('id').substr(10) + "_vcat";
-                var fit_id = '#comp_' + $(el).attr('id').substr(10) + "_vmag";
-                var error_id = '#comp_' + $(el).attr('id').substr(10) + "_err";
                 var imag = $(el).val().replace(',', '.');
                 if (isNaN(imag)) {
                     failure = true;
@@ -232,6 +232,10 @@ $(document).ready(function () {
                     ns.resetSlopeValues();
                 }
             }
+            else {
+                $(fit_id).html('');
+                $(error_id).html('');
+            }
         });
 
         if (!failure) {
@@ -252,7 +256,6 @@ $(document).ready(function () {
             var targetError = summ_error / num;
             targetError = Math.round(targetError * 1000) / 1000;
             $('#target_err').html(targetError);
-
         }
     }
 
@@ -298,7 +301,7 @@ $(document).ready(function () {
     ns.reset = function () {
         ns.resetSlopeValues();
 
-        $("input[id^='comp_imag_'").each(function (i, el) {
+        $("input[id^='comp_imag_']").each(function (i, el) {
             $(el).val('');
         });
         $('.fvmag').each(function (i, el) {
