@@ -142,7 +142,16 @@
     <Content Include="Styles\map.css" />
     <Content Include="test.html" />
     <Content Include="ToDo.txt" />
+    <Content Include="vars\ry_uma.txt" />
+    <Content Include="vars\r_boo.txt" />
+    <Content Include="vars\r_crb.txt" />
+    <Content Include="vars\r_gem.txt" />
+    <Content Include="vars\r_tri.txt" />
+    <Content Include="vars\ss_vir.txt" />
+    <Content Include="vars\s_cep.txt" />
+    <Content Include="vars\s_uma.txt" />
     <Content Include="vars\test_vv_cep.txt" />
+    <Content Include="vars\t_cep.txt" />
     <Content Include="vars\uu_aur.txt" />
     <Content Include="vars\u_mon.txt" />
     <Content Include="vars\vv_cep.txt" />
@@ -164,7 +173,9 @@
     <Content Include="js\objects.txt" />
     <Content Include="js\variables.js" />
     <Content Include="Styles\manPhot.css" />
+    <Content Include="vars\v_boo.txt" />
     <Content Include="vars\w_cyg.txt" />
+    <Content Include="vars\z_uma.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
