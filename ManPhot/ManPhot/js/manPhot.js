@@ -117,7 +117,7 @@ $(document).ready(function () {
         html += '<tr><td class="star">' + data.label + '</td>';
         html += '<td class="cord">' + data.ra + '</td>';
         html += '<td class="cord">' + data.de + '</td>';
-        html += '<td id="check_vcat" class="vcat">' + data.vcat + '</td>';
+        html += '<td id="check_vcat" class="vcat">' + Number(data.vcat).toFixed(3) + '</td>';
         html += '<td><input type="number" id="check_imag"/></td>';
         html += '<td id="check_vmag"  class="vmag"></td>';
         html += '<td id="check_err" class="error"></td></tr>';
@@ -133,7 +133,7 @@ $(document).ready(function () {
             html += '<td class="star">' + data[i].label + '</td>';
             html += '<td class="cord">' + data[i].ra + '</td>';
             html += '<td class="cord">' + data[i].de + '</td>';
-            html += '<td id="' + comp_id + '_vcat" class="vcatComp">' + data[i].vcat + '</td>';
+            html += '<td id="' + comp_id + '_vcat" class="vcatComp">' + Number(data[i].vcat).toFixed(3) + '</td>';
             html += '<td><input type="number" id="comp_imag_' + data[i].sn + '"/></td>';
             html += '<td id="' + comp_id + '_vmag" class="fvmag"></td>';
             html += '<td id="' + comp_id + '_err" class="error"></td>';
@@ -220,11 +220,11 @@ $(document).ready(function () {
                 if (!failure) {
                     var fitValue = (imag - intercept) / slope;
                     fitValue = Math.round(fitValue * 1000) / 1000;
-                    $(fit_id).html(fitValue);
+                    $(fit_id).html(fitValue.toFixed(3));
 
                     var error = fitValue - vcat;
                     error = Math.round(error * 1000) / 1000;
-                    $(error_id).html(error);
+                    $(error_id).html(error.toFixed(3));
                     summ_error += Math.abs(error);
                     num += 1;
                 }
@@ -243,19 +243,19 @@ $(document).ready(function () {
             var checkImag = $('#check_imag').val().replace(',', '.');
             var checkVmag = (checkImag - intercept) / slope;
             checkVmag = Math.round(checkVmag * 1000) / 1000;
-            $('#check_vmag').html(checkVmag);
+            $('#check_vmag').html(checkVmag.toFixed(3));
             var checkError = checkVmag - checkVcat;
             checkError = Math.round(checkError * 1000) / 1000;
-            $('#check_err').html(checkError);
+            $('#check_err').html(checkError.toFixed(3));
 
             var targetImag = $('#target_imag').val().replace(',', '.');
             var targetVmag = (targetImag - intercept) / slope;
             targetVmag = Math.round(targetVmag * 1000) / 1000;
-            $('#target_vmag').html(targetVmag);
+            $('#target_vmag').html(targetVmag.toFixed(3));
 
             var targetError = summ_error / num;
             targetError = Math.round(targetError * 1000) / 1000;
-            $('#target_err').html(targetError);
+            $('#target_err').html(targetError.toFixed(3));
         }
     }
 
@@ -374,15 +374,15 @@ $(document).ready(function () {
         varStar.jd = $('#jd').html();
         varStar.date = $('#obsDate').val().replace(/:/g,'.');
         varStar.time = hour + ":" + minute;
-        varStar.vmag = vmag;
-        varStar.err = error;
+        varStar.vmag = vmag.toFixed(2);
+        varStar.err = error.toFixed(2);
         varStar.tg = "TG";
         varStar.no = "NO";
         varStar.std = "STD";
         varStar.ensemble = "ENSEMBLE";
         varStar.na = "na";
         varStar.checklabel = checkStarLabel;
-        varStar.checkvmag = checkVmag;
+        varStar.checkvmag = checkVmag.toFixed(2);
         varStar.mapid = targetMap;
         varStar.comment = targetComment;
 
@@ -409,7 +409,7 @@ $(document).ready(function () {
             html += '<tr><td>&nbsp;&nbsp;</td>';
             html += '<td>' + star.name + '</td>';
             html += '<td>' + star.jd + '</td>';
-            html += '<td>' + star.date + '</td>';
+            html += '<td class="text">' + star.date + '</td>';
             html += '<td class="text">' + star.time + '</td>';
             html += '<td class="text">' + star.vmag + '</td>';
             html += '<td class="text">' + star.err + '</td>';
@@ -418,7 +418,7 @@ $(document).ready(function () {
             html += '<td>' + star.std + '</td>';
             html += '<td>' + star.ensemble + '</td>';
             html += '<td>' + star.na + '</td>';
-            html += '<td>' + star.checklabel + '</td>';
+            html += '<td class="text">' + star.checklabel + '</td>';
             html += '<td class="text">' + star.checkvmag + '</td>';
             html += '<td>' + star.mapid + '</td>';
             html += '<td>' + star.comment + '</td>';
