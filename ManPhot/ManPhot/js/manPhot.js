@@ -272,12 +272,19 @@ $(document).ready(function () {
             var day = dateArray[2];
 
             var date = new Date(year, month, day, hour, minute, 0, 0);
-            $('#jd').html(date.getJulian());
-            isShown = true;
+            if (date < Date.now()) {
+                $('#jd').html(date.getJulian());
+                isShown = true;
+            }
+            else {
+                alert("Observation date is higher than current date!");
+                isShown = false;
+            }
         }
         else {
             alert("Please add the observation date and time!");
         }
+
         return isShown;
     }
 
