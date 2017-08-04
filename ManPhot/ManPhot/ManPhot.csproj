@@ -118,7 +118,7 @@
     <Content Include="maps\R_Tri_B.png" />
     <Content Include="maps\SS_Vir_A.png" />
     <Content Include="maps\SS_Vir_B.png" />
-    <Content Include="maps\S_Cep_A.png" />
+    <Content Include="maps\S_Cep_AB.png" />
     <Content Include="maps\S_Cep_B.png" />
     <Content Include="maps\S_Uma.png" />
     <Content Include="maps\T_Cep.png" />
