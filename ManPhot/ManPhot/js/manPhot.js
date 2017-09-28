@@ -314,7 +314,7 @@ $(document).ready(function () {
         $('.fvmag').each(function (i, el) {
             $(el).html('');
         });
-        $('.err').each(function (i, el) {
+        $('.error').each(function (i, el) {
             $(el).html('');
         });
 
