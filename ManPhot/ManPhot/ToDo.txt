@@ -20,7 +20,7 @@
 
 Color index feature
 -------------------
-- create a new feature branch with the name of: feature/color_index
+	- create a new feature branch with the name of: feature/color_index
 - bug fix: in case of reset Error column has not been deleted
 - when other than G selected V Cat title should be replaced for B Cat or R Cat
 - star id should reflect whether G, B or R reduction
