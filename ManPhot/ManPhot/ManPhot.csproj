@@ -153,7 +153,6 @@
     <Content Include="vars\t_cep.txt" />
     <Content Include="vars\t_uma.txt" />
     <Content Include="vars\uu_aur.txt" />
-    <Content Include="vars\u_mon.txt" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -172,6 +171,7 @@
     <Content Include="js\objects.txt" />
     <Content Include="js\variables.js" />
     <Content Include="Styles\manPhot.css" />
+    <Content Include="vars\u_mon_b.txt" />
     <Content Include="vars\vv_cep_b.txt" />
     <Content Include="vars\v_boo.txt" />
     <Content Include="vars\w_cyg.txt" />
