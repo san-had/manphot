@@ -111,6 +111,7 @@
     <Content Include="js\maprotate.js" />
     <Content Include="js\tests.js" />
     <Content Include="map.html" />
+    <Content Include="maps\Chi_Cyg_AB.png" />
     <Content Include="maps\RY_UMA_Aspec.png" />
     <Content Include="maps\R_Boo_AB.png" />
     <Content Include="maps\R_Crb_B.png" />
@@ -142,6 +143,8 @@
     <Content Include="Styles\map.css" />
     <Content Include="test.html" />
     <Content Include="ToDo.txt" />
+    <Content Include="vars\chi_cyg.txt" />
+    <Content Include="vars\chi_cyg_b.txt" />
     <Content Include="vars\r_boo.txt" />
     <Content Include="vars\r_crb.txt" />
     <Content Include="vars\r_gem.txt" />
@@ -174,7 +177,6 @@
     <Content Include="vars\u_mon_b.txt" />
     <Content Include="vars\vv_cep_b.txt" />
     <Content Include="vars\v_boo.txt" />
-    <Content Include="vars\w_cyg.txt" />
     <Content Include="vars\z_uma.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
