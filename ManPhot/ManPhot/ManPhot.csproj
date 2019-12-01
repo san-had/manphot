@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -111,6 +112,7 @@
     <Content Include="js\maprotate.js" />
     <Content Include="js\tests.js" />
     <Content Include="map.html" />
+    <Content Include="maps\AC_Her_AB.png" />
     <Content Include="maps\Chi_Cyg_AB.png" />
     <Content Include="maps\RY_UMA_Aspec.png" />
     <Content Include="maps\R_Boo_AB.png" />
@@ -143,6 +145,7 @@
     <Content Include="Styles\map.css" />
     <Content Include="test.html" />
     <Content Include="ToDo.txt" />
+    <Content Include="vars\ac_her.txt" />
     <Content Include="vars\chi_cyg.txt" />
     <Content Include="vars\chi_cyg_b.txt" />
     <Content Include="vars\r_boo.txt" />
