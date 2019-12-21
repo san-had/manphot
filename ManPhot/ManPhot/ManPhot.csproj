@@ -148,6 +148,7 @@
     <Content Include="vars\ac_her.txt" />
     <Content Include="vars\chi_cyg.txt" />
     <Content Include="vars\chi_cyg_b.txt" />
+    <Content Include="vars\ry_uma.txt" />
     <Content Include="vars\r_boo.txt" />
     <Content Include="vars\r_crb.txt" />
     <Content Include="vars\r_gem.txt" />
@@ -176,8 +177,11 @@
     <Content Include="js\objects.txt" />
     <Content Include="js\variables.js" />
     <Content Include="Styles\manPhot.css" />
+    <Content Include="vars\uu_aur.txt" />
     <Content Include="vars\uu_aur_b.txt" />
+    <Content Include="vars\u_mon.txt" />
     <Content Include="vars\u_mon_b.txt" />
+    <Content Include="vars\vv_cep.txt" />
     <Content Include="vars\vv_cep_b.txt" />
     <Content Include="vars\v_boo.txt" />
     <Content Include="vars\w_cyg.txt" />
