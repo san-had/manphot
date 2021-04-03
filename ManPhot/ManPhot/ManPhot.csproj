@@ -126,6 +126,7 @@
     <Content Include="maps\S_Uma.png" />
     <Content Include="maps\T_Cep.png" />
     <Content Include="maps\T_Cep_B.png" />
+    <Content Include="maps\T_Uma_B.png" />
     <Content Include="maps\UU_Aur.png" />
     <Content Include="maps\U_Mon_A.png" />
     <Content Include="maps\U_Mon_B.png" />
